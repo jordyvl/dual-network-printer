@@ -1,0 +1,86 @@
+term.clear()
+term.setCursorPos(1,1)
+print"Which printer do you want to use"
+print"Printer 1 Downstairs"
+print"Printer 2 OS Development"
+print"Define as p and Number Example:"
+print"Printer 1 = p1"
+print"Keep in mind that you know where the document is saved"
+print"If you put in a wrong name it will give you an error and it may waste some ink and paper"
+local input = read()
+if input == "p1" then
+term.clear()
+term.setCursorPos(1,1)
+local printer = peripheral.wrap("printer_2")
+print"Printer 1 is Choosen"
+sleep(4)
+term.clear()
+term.setCursorPos(1,1)
+print"Which file should i print for you?"
+local abc = read()
+fs.exists(abc)
+if true then
+printer.newPage()
+local h = fs.open((abc), "r")
+i = h.readAll()
+printer.write(i)
+print"Should the page have a title?"
+local answer = read()
+if answer == "yes" then
+term.clear()
+term.setCursorPos(1,1)
+term.write("What Should The Page Title Be: ")
+local title = read()
+printer.setPageTitle(title)
+printer.endPage()
+term.clear()
+term.setCursorPos(1,1)
+print"Print Succesful"
+elseif answer == "no" then
+printer.endPage()
+term.clear()
+term.setCursorPos(1,1)
+print"Well Okay the page is printed without a title"
+end
+end
+elseif input == "p2" then
+term.clear()
+term.setCursorPos(1,1)
+local printer = peripheral.wrap("printer_4")
+print"Printer 2 Choosen"
+sleep(4)
+term.clear()
+term.setCursorPos(1,1)
+print"Which file should i print for you?"
+local abc = read()
+fs.exists(abc)
+if true then
+printer.newPage()
+local h = fs.open((abc), "r")
+i = h.readAll()
+printer.write(i)
+print"Should the page have a title?"
+local answer = read()
+if answer == "yes" then
+term.clear()
+term.setCursorPos(1,1)
+term.write("What Should The Title Be: ")
+local title = read()
+printer.setPageTitle(title)
+printer.endPage()
+term.clear()
+term.setCursorPos(1,1)
+print"Print Succesful"
+elseif answer == "no" then
+term.clear()
+term.setCursorPos(1,1)
+print"Well Okay the page is printed without a title"
+printer.endPage()
+end
+end
+else
+print"Bad Input"
+sleep(3)
+term.clear()
+term.setCursorPos(1,1)
+end
