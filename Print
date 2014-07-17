@@ -70,7 +70,6 @@ for i = 1, #tArgs do
 		else
 			local printer = peripheral.wrap(selectedPrinter)
 			local nPage = 0
-			local sName = fs.getName( sPath )
 			if printer.getInkLevel() < 1 then
 				printError(selectedPrinter.."Printer out of ink")
 				sleep(2)
