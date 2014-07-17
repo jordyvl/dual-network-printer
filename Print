@@ -68,22 +68,62 @@ for i = 1, #tArgs do
 			printError(tArgs[i]..": file not found")
 			sleep(1.5)
 		else
-			local pri = peripheral.wrap(selectedPrinter)
-			pri.newPage()
-			local ot
-			if term.current then
-				ot = term.current()
+			local printer = peripheral.wrap(selectedPrinter)
+			local nPage = 0
+			if printer.getInkLevel() < 1 then
+				printError(selectedPrinter.."Printer out of ink")
+				sleep(2)
+			elseif printer.getPaperLevel() < 1 then
+				printError(selectedPrinter..": out of paper")
+				sleep(2)
 			end
-			term.redirect(pri)
-			local file = fs.open(shell.resolve(tArgs[i]), "r")
-			print(file.readAll())
-			file.close()
-			if ot then
-				term.redirect(ot)
-			else
-				term.restore()
+			local screenTerminal = term.current()
+			local printerTerminal = {
+				getCursorPos = printer.getCursorPos,
+				setCursorPos = printer.setCursorPos,
+				getSize = printer.getPageSize,
+				write = printer.write,
+			}
+			printerTerminal.scroll = function()
+				if nPage == 1 then
+					printer.setPageTitle( sName.." (page "..nPage..")" )			
+				end
+				
+				while not printer.newPage()	do
+					term.redirect( screenTerminal )
+					if printer.getInkLevel() < 1 then
+						printError(selectedPrinter..": out of ink, please refill")
+					elseif printer.getPaperLevel() < 1 then
+						printError(selectedPrinter..": out of paper, please refill")
+					else
+						printError(selectedPrinter..": output tray full, please empty")
+					end
+					term.redirect( printerTerminal )
+					local timer = os.startTimer(0.5)
+					sleep(0.5)
+				end
+				nPage = nPage + 1
+				if nPage == 1 then
+					printer.setPageTitle( tArgs[i] )
+				else
+					printer.setPageTitle( tArgs[i].." (page "..nPage..")" )
+				end
 			end
-			pri.endPage()
+			term.redirect( printerTerminal )
+			local ok, error = pcall( function()
+				term.scroll()
+				local file = fs.open(tArgs[i], "r")
+				print(file.readAll())
+				file.close()
+			end )
+        	term.redirect( screenTerminal )
+			if not ok then
+				printError( error )
+			end
+			while not printer.endPage() do
+				printError(selectedPrinter..": output tray full, please empty")
+				sleep( 0.5 )
+			end
 		end
 	end
 end
