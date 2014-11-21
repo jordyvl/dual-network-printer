@@ -21,6 +21,11 @@ if not fs.exists(".lmnet/apis/ui") then
 	file.close()
 	remote.close()
 end
+for _, v in pairs(peripheral.getNames()) do
+  if peripheral.getType(v) == "printer" then
+    print(v)
+  end
+end
 local tArgs = {...}
 if #tArgs < 1 or (tArgs[1] == "-1" and #tArgs < 2) then
 	print("Usage: "..shell.getRunningProgram().." [-1] <file> [file ...]")
