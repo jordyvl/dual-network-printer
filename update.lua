@@ -103,9 +103,8 @@ print("Network Printing Install or Update")
 print("Getting files...")
 local files = {
 	["Print"] = "Dualprint/print",
-	["pview"] = "Dualprint/Connected"
-	["update.lua"] = "update"
-
+	["pview"] = "Dualprint/Connected",
+	["update.lua"] = "update",
 }
 local fileCount = 0
 for _ in pairs(files) do
@@ -145,3 +144,6 @@ for k, v in pairs(files) do
 	end
 	filesDownloaded = filesDownloaded + 1
 end
+term.clear()
+term.setCursorPos(1,1)
+print"Install Completed"
