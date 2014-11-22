@@ -124,7 +124,7 @@ for k, v in pairs(files) do
 	term.setBackgroundColor(colors.white)
 	clear()
 	term.setCursorPos(2, 2)
-	print("LMNet OS Updater")
+	print("DualPrint Update!")
 	term.setCursorPos(2, 4)
 	print("File: "..v)
 	term.setCursorPos(2, h - 1)
