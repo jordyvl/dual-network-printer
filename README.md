@@ -2,4 +2,4 @@ dual-network-printer
 ====================
 Created by MultMine and Jordyvl 
 <br/>This program lets you decide which printer you want to use.
-So you can finally add more printers to your network :)
+<br/>So you can finally add more printers to your network :)
