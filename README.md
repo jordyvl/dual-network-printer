@@ -1,6 +1,5 @@
 dual-network-printer
 ====================
-
-A program which let you decide what network printer you want to use you dont longer have to hope that your document is comming from the good printer because you can choose the printer yourself
-At the moment we didnt found any bugs but if you find one feel free to open a issue if there is one
-special thanks to multmine for debugging the program and adding a kind of a menu thing
+Created by MultMine and Jordyvl 
+This program lets you decide which printer you want to use.
+So you can finally add more printers to your network :)
