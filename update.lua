@@ -104,7 +104,7 @@ print("Getting files...")
 local files = {
 	["Print"] = "Dualprint/print",
 	["pview"] = "Dualprint/Connected",
-	["update.lua"] = "update",
+	["update.lua"] = "Dualprint/update",
 }
 local fileCount = 0
 for _ in pairs(files) do
